@@ -1,1 +1,1 @@
-myweb:1.0
+myweb:latest
