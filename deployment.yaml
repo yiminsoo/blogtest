@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb-deployment
+  namespace: myweb
+  labels:
+    app: myweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - name: myweb-container
+        image: yiminsoo/myweb:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: myweb-data
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: myweb-data
+        persistentVolumeClaim:
+          claimName: myweb-pvc
+
